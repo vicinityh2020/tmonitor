@@ -54,7 +54,7 @@ public class OrganizationOverviewService {
 		
 		sendQueryOrganisation(Queries.queryOrganizationThings, now);
 		Set<String> organisations = sendQueryOrganisationList(Queries.queryOrganizationList);
-
+		System.out.println("ORGANISATIONS NUMBER: "+organisations.size());
 		for(String organisation:organisations) {
 			String organisationName = sendQueryOrganisationName(Queries.queryOrganizationName, organisation);
 			if(organisationName!=null) {

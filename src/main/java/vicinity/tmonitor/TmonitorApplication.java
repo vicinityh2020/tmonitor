@@ -44,7 +44,7 @@ public class TmonitorApplication {
 	
 	
 	
-	@Scheduled(fixedDelay = 86400000) // 1 day update
+	@Scheduled(fixedDelay = 3600000) // 1 h update
 	//@Scheduled(fixedDelay = 120000) // 1 day update
 	public void scheduledUpdate() {
 		System.out.println("Updating the data of the database");

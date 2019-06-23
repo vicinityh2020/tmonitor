@@ -17,11 +17,16 @@ public class DataService {
 	private ThingTypeService serviceThingsType;
 	@Autowired
 	private ObservationTypeService serviceObservationType;
+	@Autowired
+	private ThingsOwnedService serviceOwnedThings;
 	
 	public void updateData() {
+		
+		
 		serviceOverview.updateData();
 		System.out.println("\tOverview updated");
 		serviceOrganization.updateData();
+		serviceOwnedThings.udateData();
 		System.out.println("\tOrganisations updated");
 		serviceThingsType.updateData();
 		System.out.println("\tThings updated");
@@ -30,5 +35,6 @@ public class DataService {
 		sericeDashboard.createVICINITYGeneralDashboard();
 		System.out.println("\tDashboards updated");
 		System.out.println("Monitor updated");
+		
 	}
 }
