@@ -83,7 +83,7 @@ public class OrganizationOverviewService {
 				repoOrganizationOverview.save(organisationOverview);
 				
 			}else {
-				System.out.println("ERRORR!!!!!");
+				System.out.println("ERRORR!!!!! with organisation: "+organisation);
 			}
 		}
 		

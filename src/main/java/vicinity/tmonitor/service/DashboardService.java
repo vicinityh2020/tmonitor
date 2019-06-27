@@ -26,7 +26,7 @@ public class DashboardService {
 			//System.out.println(instance);
 			
 			String response = Unirest.post(TmonitorApplication.GRAFANA_ENDPOINT+"/api/dashboards/db").headers(headers).body(instance).asString().getBody();
-			//System.out.println(response);
+			System.out.println(response);
 			//System.exit(-1);
 		} catch (Exception e) {
 		
@@ -42,8 +42,8 @@ public class DashboardService {
 		try {
 			String instance = Queries.ALT_TEMPLATE;
 			String response = Unirest.post(TmonitorApplication.GRAFANA_ENDPOINT+"/api/dashboards/db").headers(headers).body(instance).asString().getBody();
-			//System.out.println(response);
-		} catch (UnirestException e) {
+			System.out.println(response);
+		} catch (Exception e) {
 		
 			e.printStackTrace();
 		}
@@ -108,7 +108,7 @@ public class DashboardService {
 						"          \"hide\": false,\n" + 
 						"          \"metricColumn\": \"none\",\n" + 
 						"          \"rawQuery\": true,\n" + 
-						"          \"rawSql\": \"SELECT\\n  timestamp AS \\\"time\\\",\\n  things,\\n  things_adapters,\\n  things_services,\\n  things_interoperable\\nFROM organization_overview\\nWHERE name=\\\"#OrganizationName#\\\" AND\\n  $__timeFilter(timestamp)\\nORDER BY timestamp\",\n" + 
+						"          \"rawSql\": \"SELECT\\n  timestamp AS \\\"time\\\",\\n  (things - (things_adapters+things_services) ) AS \\\"Generic\\\",\\n  things_adapters AS \\\"Adapters\\\",\\n  things_services AS \\\"Services\\\",\\n  things_interoperable AS \\\"Interoprable Things\\\" \\nFROM organization_overview\\nWHERE name=\\\"#OrganizationName#\\\" AND\\n  $__timeFilter(timestamp)\\nORDER BY timestamp\",\n" + 
 						"          \"refId\": \"A\",\n" + 
 						"          \"select\": [\n" + 
 						"            [\n" + 
@@ -246,7 +246,7 @@ public class DashboardService {
 						"          \"group\": [],\n" + 
 						"          \"metricColumn\": \"none\",\n" + 
 						"          \"rawQuery\": true,\n" + 
-						"          \"rawSql\": \"SELECT\\n  type_name,\\n  number\\nFROM things_owned\\nWHERE\\n  $__timeFilter(timestamp) && name = \\\"#OrganizationName#\\\"\\nORDER BY timestamp\",\n" + 
+						"          \"rawSql\": \"SELECT DISTINCT\\n  type_name AS \\\"Type\\\",\\n  number AS \\\"Amount\\\" \\nFROM things_owned\\nWHERE\\n  $__timeFilter(timestamp) && name = \\\"#OrganizationName#\\\"\\nORDER BY timestamp\",\n" + 
 						"          \"refId\": \"A\",\n" + 
 						"          \"select\": [\n" + 
 						"            [\n" + 
@@ -280,7 +280,7 @@ public class DashboardService {
 						"      ],\n" + 
 						"      \"timeFrom\": null,\n" + 
 						"      \"timeShift\": null,\n" + 
-						"      \"title\": \"Panel Title\",\n" + 
+						"      \"title\": \"Things of this organisation from adapters\",\n" + 
 						"      \"transform\": \"table\",\n" + 
 						"      \"type\": \"table\"\n" + 
 						"    },\n" + 
